@@ -78,14 +78,6 @@ const Signin = ({ isSignUp = false }) => {
                             {isSignUp ? 'Sign up with Google' : 'Sign in with Google'}
                         </button>
                     </div>
-                    
-                    <div className="mt-6 text-center text-sm text-gray-400">
-                        {isSignUp ? (
-                            <p>Already have an account? <Link to="/signin" className="text-gold-primary hover:text-gold-light">Sign in</Link></p>
-                        ) : (
-                            <p>Don't have an account? <Link to="/signup" className="text-gold-primary hover:text-gold-light">Sign up</Link></p>
-                        )}
-                    </div>
                 </div>
                 
                 <div className="mt-8 text-center">

@@ -11,7 +11,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signin isSignUp={true} />} />
           <Route path="/home" element={<Home />} />
         </Routes>
       </main>
