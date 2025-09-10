@@ -1,11 +1,11 @@
 import { auth, database, googleprovider } from '../config/firebase';
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import googlepic from '../assets/googlepic.png';
-import { addDoc, collection } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-const Signin = () => {
+const Signin = ({ isSignUp = false }) => {
     const navigate = useNavigate();
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -51,18 +51,50 @@ const Signin = () => {
         }
     };
     return (
-        <div>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#000328] to-[#00458e] h-full w-full"></div>
-            <div className="signin-head w-full text-center relative z-20 opacity-0">
-                <h2 className='lexend text-5xl mt-2 md:mb-3 text-white'>Sign In</h2>
-            </div>
-            <div className="flex justify-center relative z-20 items-center ">
-                <div className='md:w-[35%] bg-white md:mt-4 p-10 rounded-lg shadoww m-2'>
-                    <h2 className='lexend text-xl mb-0'>User name</h2>
-                    <input type="text" placeholder='Enter your Username here' className='w-full my-2 mb-5 p-1 rounded-lg border' onChange={(e) => setusername(e.target.value)} />
-                    <div className="buttons flex flex-col justify-center items-center mx-auto mt-10 codepen-button before:-z-10  md:w-3/4 rounded-full">
-                        <button className='text-white bg-black russo w-full rounded-full py-1 text-l md:w-full flex justify-center items-center gap-2 hover:scale-105 transition-all' onClick={signInWithGoogle}><img className='w-10' src={googlepic} />  Sign in with Google</button>
+        <div className="min-h-screen bg-bg-primary flex flex-col items-center justify-center px-4 py-12">
+            <div className="w-full max-w-md">
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-white mb-2">{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
+                    <p className="text-gray-300">{isSignUp ? 'Join VisioBiz AI today' : 'Sign in to continue to VisioBiz AI'}</p>
+                </div>
+                
+                <div className="bg-black/30 p-8 rounded-xl shadow-lg border border-gold-primary/30">
+                    <div className="mb-6">
+                        <label className="block text-white text-sm font-medium mb-2">Username</label>
+                        <input 
+                            type="text" 
+                            placeholder="Enter your username" 
+                            className="w-full p-3 bg-bg-primary border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-primary text-white" 
+                            onChange={(e) => setusername(e.target.value)} 
+                        />
                     </div>
+                    
+                    <div className="mt-8">
+                        <button 
+                            onClick={signInWithGoogle}
+                            className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-4 rounded-lg hover:bg-gray-100 transition-all font-medium"
+                        >
+                            <img className="w-6 h-6" src={googlepic} alt="Google" />
+                            {isSignUp ? 'Sign up with Google' : 'Sign in with Google'}
+                        </button>
+                    </div>
+                    
+                    <div className="mt-6 text-center text-sm text-gray-400">
+                        {isSignUp ? (
+                            <p>Already have an account? <Link to="/signin" className="text-gold-primary hover:text-gold-light">Sign in</Link></p>
+                        ) : (
+                            <p>Don't have an account? <Link to="/signup" className="text-gold-primary hover:text-gold-light">Sign up</Link></p>
+                        )}
+                    </div>
+                </div>
+                
+                <div className="mt-8 text-center">
+                    <Link to="/" className="text-gray-400 hover:text-white text-sm flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Back to home
+                    </Link>
                 </div>
             </div>
         </div>
