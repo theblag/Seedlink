@@ -34,7 +34,11 @@
   }
 
   body {
-    @apply m-0 flex min-w-[320px] min-h-screen bg-[color:var(--color-bg-primary)] text-white;
+    @apply m-0 min-w-[320px] min-h-screen bg-[color:var(--color-bg-primary)] text-white;
+  }
+  
+  #root {
+    @apply w-full max-w-full overflow-x-hidden;
   }
 }
 
@@ -52,6 +56,12 @@
     button:focus,
   button:focus-visible {
     @apply outline-none ring-2 ring-[color:var(--color-gold-primary)];
+  }
+}
+
+@layer components {
+  .form-input {
+    @apply w-full rounded-md border border-[#DBC49A] bg-[#0A1425] text-[#DED6C4] p-3 placeholder-[#DED6C4]/50 focus:outline-none focus:ring-2 focus:ring-[#E8D5B1];
   }
 }
 
