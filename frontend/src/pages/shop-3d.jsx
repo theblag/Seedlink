@@ -116,7 +116,7 @@ function ARButton({ onStartAR }) {
 
 // WebXR AR Manager Hook
 function useWebXR() {
-    const { gl, scene, camera } = useThree();
+    const { gl } = useThree();
     const [isARActive, setIsARActive] = useState(false);
 
     const startAR = async () => {
@@ -137,19 +137,9 @@ function useWebXR() {
             await gl.xr.setSession(session);
             setIsARActive(true);
 
-            // Set up AR-specific settings
-            gl.xr.setReferenceSpaceType('local');
-            
-            // Scale down the room for AR
-            scene.scale.set(0.1, 0.1, 0.1);
-            scene.position.set(0, -0.5, -1); // Position room in front of user
-
             // Handle session end
             session.addEventListener('end', () => {
                 setIsARActive(false);
-                // Reset scale and position when exiting AR
-                scene.scale.set(1, 1, 1);
-                scene.position.set(0, 0, 0);
             });
 
         } catch (error) {
@@ -161,12 +151,6 @@ function useWebXR() {
     useEffect(() => {
         // Enable XR in the renderer
         gl.xr.enabled = true;
-        
-        // Set up renderer for AR
-        gl.setPixelRatio(window.devicePixelRatio);
-        gl.outputEncoding = THREE.sRGBEncoding;
-        gl.toneMapping = THREE.ACESFilmicToneMapping;
-        gl.toneMappingExposure = 1.0;
     }, [gl]);
 
     return { startAR, isARActive };
@@ -184,15 +168,26 @@ function ARControls() {
 
 // AR Room Component - optimized for AR viewing
 function ARRoom() {
-    const { isARActive } = useWebXR();
+    const { gl } = useThree();
+    const [isARActive, setIsARActive] = useState(false);
+    
+    useEffect(() => {
+        const checkARState = () => {
+            setIsARActive(gl.xr.isPresenting);
+        };
+        
+        // Check AR state periodically
+        const interval = setInterval(checkARState, 100);
+        return () => clearInterval(interval);
+    }, [gl]);
     
     if (!isARActive) {
         return <Room />; // Normal room when not in AR
     }
     
-    // Simplified room for AR with better lighting
+    // AR-optimized room with additional lighting
     return (
-        <group>
+        <group scale={[0.1, 0.1, 0.1]} position={[0, -0.5, -1]}>
             <ambientLight intensity={0.8} />
             <directionalLight position={[2, 2, 2]} intensity={0.8} />
             <Room />
@@ -208,13 +203,9 @@ export default function Shop() {
         <Canvas 
             camera={{ position: [0, 0, 2], fov: 75 }} 
             className="w-screen h-screen"
-            onCreated={({ gl, scene }) => {
+            onCreated={({ gl }) => {
                 // Enable WebXR support
                 gl.xr.enabled = true;
-                gl.setAnimationLoop(() => {
-                    // This ensures proper rendering in AR mode
-                    gl.render(scene, gl.xr.getCamera());
-                });
             }}
         >
           <ambientLight intensity={0.5} />
