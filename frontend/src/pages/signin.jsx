@@ -8,9 +8,16 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 const Signin = ({ isSignUp = false }) => {
     const navigate = useNavigate();
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
-                navigate("/home");
+                const userDocRef = doc(database, "Users", auth.currentUser?.uid, "businessInfo", "data");
+            const docSnap = await getDoc(userDocRef);
+
+            if (docSnap.exists()) {
+                navigate('/home')
+            }else{
+                navigate("/businessInfo");
+            }
             }
         });
 
@@ -26,7 +33,14 @@ const Signin = ({ isSignUp = false }) => {
         try {
             await signInWithPopup(auth, googleprovider);
             addUser();
-            navigate("/home");
+            const userDocRef = doc(database, "Users", auth.currentUser?.uid, "businessInfo", "data");
+            const docSnap = await getDoc(userDocRef);
+
+            if (docSnap.exists()) {
+                navigate('/home')
+            }else{
+                navigate("/businessInfo");
+            }
         } catch (error) {
             console.error("Error signing in with Google:", error.message);
             alert("Error signing in with Google. Please try again.");

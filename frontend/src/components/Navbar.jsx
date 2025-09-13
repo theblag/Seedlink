@@ -26,7 +26,7 @@ const Navbar = () => {
     <nav className="bg-bg-primary py-4 shadow-md sticky top-0 z-50 border-b-2 border-gold-primary">
       <div className="container mx-auto px-4 flex justify-between items-center max-w-7xl">
         <Link to="/home" className="text-2xl font-bold text-white">
-          <span className="tracking-wide">VisioBiz<span className="text-gold-primary font-extrabold">AI</span></span>
+          <span className="tracking-wide">Seedlink<span className="text-gold-primary font-extrabold">AI</span></span>
         </Link>
         
         <div className="flex gap-6 items-center">

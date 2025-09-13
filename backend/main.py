@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 
 app = FastAPI(
-    title="VisioBiz AI Catalogue Generator",
+    title="Seedlink AI Catalogue Generator",
     description="AI-powered product catalogue generation with Firebase integration",
     version="1.0.0"
 )
@@ -33,7 +33,7 @@ app.include_router(catalogue_router, prefix="/api/catalogue", tags=["Catalogue"]
 @app.get("/")
 async def root():
     return {
-        "message": "VisioBiz AI Catalogue Generator API",
+        "message": "Seedlink AI Catalogue Generator API",
         "status": "running",
         "version": "1.0.0"
     }

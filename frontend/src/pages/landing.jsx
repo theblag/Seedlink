@@ -9,7 +9,7 @@ const Landing = () => {
       {/* Hero Section */}
       <header className="container mx-auto px-4 py-8 flex justify-between items-center">
         <div className="text-2xl font-bold">
-          <span className="tracking-wide">VisioBiz<span className="text-gold-primary font-extrabold">AI</span></span>
+          <span className="tracking-wide">Seedlink<span className="text-gold-primary font-extrabold">AI</span></span>
         </div>
       </header>
 
@@ -23,7 +23,7 @@ const Landing = () => {
                   Empower Local Businesses with <span className="text-gold-primary">AI + AR</span> Technology
                 </h1>
                 <p className="text-lg md:text-xl opacity-90">
-                  VisioBiz AI helps local Indian businesses create immersive, trustworthy digital storefronts with just a few photos or videos.
+                  Seedlink AI helps local Indian businesses create immersive, trustworthy digital storefronts with just a few photos or videos.
                 </p>
                 <div className="pt-4">
                   <button 
@@ -82,7 +82,7 @@ const Landing = () => {
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
-            <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Join thousands of local businesses already using VisioBiz AI to create immersive digital experiences.</p>
+            <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Join thousands of local businesses already using Seedlink AI to create immersive digital experiences.</p>
             <button 
               onClick={() => navigate('/signup')} 
               className="bg-teal text-white px-8 py-3 rounded-lg font-medium text-lg hover:opacity-90 transition-all hover:-translate-y-1 shadow-lg"
@@ -99,7 +99,7 @@ const Landing = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
               <div className="text-xl font-bold">
-                <span>VisioBiz<span className="text-gold-primary">AI</span></span>
+                <span>Seedlink<span className="text-gold-primary">AI</span></span>
               </div>
               <p className="opacity-70 text-sm">Empowering local businesses with AI technology</p>
             </div>
@@ -110,7 +110,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="mt-8 text-center opacity-60 text-sm">
-            © {new Date().getFullYear()} VisioBiz AI. All rights reserved.
+            © {new Date().getFullYear()} Seedlink AI. All rights reserved.
           </div>
         </div>
       </footer>

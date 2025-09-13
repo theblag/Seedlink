@@ -42,7 +42,7 @@ const Home = () => {
       {/* Dashboard Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white mb-2">Welcome, {username}</h1>
-        <p className="text-gray-400">Manage your VisioBiz AI experience</p>
+        <p className="text-gray-400">Manage your Seedlink AI experience</p>
       </div>
       
       {/* Stats Overview */}
@@ -102,15 +102,15 @@ const Home = () => {
             </div>
             <span className="text-white font-medium">Setup AR View</span>
           </Link>
-          
-          <div onClick={logout} className="bg-black/20 hover:bg-black/40 p-4 rounded-lg border border-gray-700 flex flex-col items-center justify-center transition-all cursor-pointer">
-            <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mb-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          <Link to="/catalogue" className="bg-black/20 hover:bg-black/40 p-4 rounded-lg border border-gray-700 flex flex-col items-center justify-center transition-all">
+            <div className="w-12 h-12 bg-gold-primary/20 rounded-full flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gold-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
-            <span className="text-white font-medium">Logout</span>
-          </div>
+            <span className="text-white font-medium">Catalogue generation</span>
+          </Link>
+          
         </div>
       </div>
       
