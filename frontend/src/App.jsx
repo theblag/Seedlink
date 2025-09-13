@@ -20,6 +20,7 @@ function App() {
           <Route path="/businessInfo" element={<BusinessInfo />} />
           <Route path="/catalogue" element={<CatalogueGenerator />} />
           <Route path="/shopkeeper-dashboard" element={<ShopkeeperDashboard />} />
+          
         </Routes>
       </main>
     </div>
