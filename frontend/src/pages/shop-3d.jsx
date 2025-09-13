@@ -66,12 +66,12 @@ function Wall({ url, position, rotation }) {
 function Room() {
     return (
         <>
-            <Wall url="/src/assets/wall1.png" position={[0, 0, -2]} rotation={[0, 0, 0]} />
-            <Wall url="/src/assets/wall2.png" position={[0, 0, 2]} rotation={[0, Math.PI, 0]} />
-            <Wall url="/src/assets/wall3.png" position={[-2, 0, 0]} rotation={[0, Math.PI / 2, 0]} />
-            <Wall url="/src/assets/wall4.png" position={[2, 0, 0]} rotation={[0, -Math.PI / 2, 0]} />
-            <Wall url="/src/assets/wall5.png" position={[0, 1.5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-            <Wall url="/src/assets/wall5.png" position={[0, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
+            <Wall url="/assets/wall1.png" position={[0, 0, -2]} rotation={[0, 0, 0]} />
+            <Wall url="/assets/wall2.png" position={[0, 0, 2]} rotation={[0, Math.PI, 0]} />
+            <Wall url="/assets/wall3.png" position={[-2, 0, 0]} rotation={[0, Math.PI / 2, 0]} />
+            <Wall url="/assets/wall4.png" position={[2, 0, 0]} rotation={[0, -Math.PI / 2, 0]} />
+            <Wall url="/assets/wall5.png" position={[0, 1.5, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+            <Wall url="/assets/wall5.png" position={[0, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
         </>
     );
 }
