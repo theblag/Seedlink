@@ -80,7 +80,7 @@ export default function Shop() {
         <Canvas camera={{ position: [0, 0, 2], fov: 75 }} className="w-screen h-screen">
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} />
-          {isMobile ? <OrbitControls enableZoom={false} /> : <Controls />}
+          {isMobile ? <OrbitControls /> : <Controls />}
           <Room />
         </Canvas>
       </div>
