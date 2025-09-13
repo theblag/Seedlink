@@ -137,20 +137,36 @@ function useWebXR() {
             await gl.xr.setSession(session);
             setIsARActive(true);
 
+            // Set up AR-specific settings
+            gl.xr.setReferenceSpaceType('local');
+            
+            // Scale down the room for AR
+            scene.scale.set(0.1, 0.1, 0.1);
+            scene.position.set(0, -0.5, -1); // Position room in front of user
+
             // Handle session end
             session.addEventListener('end', () => {
                 setIsARActive(false);
+                // Reset scale and position when exiting AR
+                scene.scale.set(1, 1, 1);
+                scene.position.set(0, 0, 0);
             });
 
         } catch (error) {
             console.error('Failed to start AR session:', error);
-            alert('Failed to start AR. Make sure you are on a secure connection (HTTPS).');
+            alert('Failed to start AR. Make sure you are on a secure connection (HTTPS) and using a compatible device.');
         }
     };
 
     useEffect(() => {
         // Enable XR in the renderer
         gl.xr.enabled = true;
+        
+        // Set up renderer for AR
+        gl.setPixelRatio(window.devicePixelRatio);
+        gl.outputEncoding = THREE.sRGBEncoding;
+        gl.toneMapping = THREE.ACESFilmicToneMapping;
+        gl.toneMappingExposure = 1.0;
     }, [gl]);
 
     return { startAR, isARActive };
@@ -158,8 +174,30 @@ function useWebXR() {
 
 // AR Controls Component
 function ARControls() {
-    const { startAR } = useWebXR();
+    const { startAR, isARActive } = useWebXR();
+    
+    // Only render AR button outside of AR mode
+    if (isARActive) return null;
+    
     return <ARButton onStartAR={startAR} />;
+}
+
+// AR Room Component - optimized for AR viewing
+function ARRoom() {
+    const { isARActive } = useWebXR();
+    
+    if (!isARActive) {
+        return <Room />; // Normal room when not in AR
+    }
+    
+    // Simplified room for AR with better lighting
+    return (
+        <group>
+            <ambientLight intensity={0.8} />
+            <directionalLight position={[2, 2, 2]} intensity={0.8} />
+            <Room />
+        </group>
+    );
 }
 
 export default function Shop() {
@@ -170,15 +208,19 @@ export default function Shop() {
         <Canvas 
             camera={{ position: [0, 0, 2], fov: 75 }} 
             className="w-screen h-screen"
-            onCreated={({ gl }) => {
+            onCreated={({ gl, scene }) => {
                 // Enable WebXR support
                 gl.xr.enabled = true;
+                gl.setAnimationLoop(() => {
+                    // This ensures proper rendering in AR mode
+                    gl.render(scene, gl.xr.getCamera());
+                });
             }}
         >
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} />
           {isMobile ? <OrbitControls enableZoom={false} /> : <Controls />}
-          <Room />
+          <ARRoom />
           <ARControls />
         </Canvas>
       </div>
